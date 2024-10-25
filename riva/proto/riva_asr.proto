@@ -399,7 +399,31 @@ message StreamingRecognizeResponse {
   RequestId id = 100;
 }
 
-message PipelineStates {
+enum SpeechEventType {
+  // No speech event specified.
+  SPEECH_EVENT_TYPE_UNSPECIFIED = 0;
+
+  // This event indicates that the server has detected the end of the user's
+  // speech utterance and expects no additional speech. Therefore, the server
+  // will not process additional audio and will close the gRPC bidirectional
+  // stream. This event is only sent if there was a force cutoff due to
+  // silence being detected early.
+  END_OF_SINGLE_UTTERANCE = 1;
+
+  // This event indicates that the server has detected the beginning of human
+  // voice activity in the stream. This event can be returned multiple times
+  // if speech starts and stops repeatedly throughout the stream. This event
+  // is only sent if `voice_activity_events` is set to true.
+  SPEECH_ACTIVITY_BEGIN = 2;
+
+  // This event indicates that the server has detected the end of human voice
+  // activity in the stream. This event can be returned multiple times if
+  // speech starts and stops repeatedly throughout the stream. This event is
+  // only sent if `voice_activity_events` is set to true.
+  SPEECH_ACTIVITY_END = 3;
+}
+
+message PipelineStates{
   // Neural VAD probabilities
   repeated float vad_probabilities = 1;
 }
@@ -437,4 +461,7 @@ message StreamingRecognitionResult {
 
   // Message for pipeline states
   optional PipelineStates pipeline_states = 7;
+
+  // Indicates the type of speech event.
+  SpeechEventType speech_event_type = 8;
 }
