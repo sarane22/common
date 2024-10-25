@@ -149,13 +149,13 @@ message EndpointingConfig {
 
 
 message VADConfig {
-  optional int32 offset = 1;
+  optional float offset = 1;
   optional float onset = 2;
 
-  optional int32 pad_offset = 3;
+  optional float pad_offset = 3;
   optional float pad_onset = 4;
 
-  optional int32 min_duration_off = 5;
+  optional float min_duration_off = 5;
   optional float min_duration_on = 6;
 }
 
