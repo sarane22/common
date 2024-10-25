@@ -146,6 +146,19 @@ message EndpointingConfig {
   optional float stop_threshold_eou = 6;
 }
 
+
+
+message VADConfig {
+  optional int32 offset = 1;
+  optional float onset = 2;
+
+  optional int32 pad_offset = 3;
+  optional float pad_onset = 4;
+
+  optional int32 min_duration_off = 5;
+  optional float min_duration_on = 6;
+}
+
 // Provides information to the recognizer that specifies how to process the
 // request
 message RecognitionConfig {
@@ -234,6 +247,7 @@ message RecognitionConfig {
   // Config for tuning start or end of utterance parameters.
   // If empty, Riva will use default values or custom values if specified in riva-build arguments.
   optional EndpointingConfig endpointing_config = 25;
+  optional VADConfig vad_config = 25;
 }
 
 // Provides information to the recognizer that specifies how to process the
