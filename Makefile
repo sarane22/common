@@ -1,5 +1,5 @@
 DST_DIR ?= .
-SRC_DIR ?= ./riva/proto
+SRC_DIR ?= ./nemotronspeech/proto
 
 setup:
 	@mkdir -p ${DST_DIR}
